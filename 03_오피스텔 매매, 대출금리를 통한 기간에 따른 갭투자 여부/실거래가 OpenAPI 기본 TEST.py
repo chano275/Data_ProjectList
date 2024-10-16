@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 
 # API 기본 설정 / 발급받은 API 키 / API 엔드포인트
-API_KEY = '발급받은 API_KEY를 입력하세요'
+API_KEY = 'ophtl1lbQO6jla4%2BJbkgnbcfo8LtBR69dkK7zrkGXu9c4IwDVGA4FwzzhsVRsIC9esBsOubhaQxWwye5gtsMbQ%3D%3D'
 ENDPOINT = 'https://apis.data.go.kr/1613000/RTMSDataSvcOffiTrade/getRTMSDataSvcOffiTrade'
 
 # 서울특별시의 모든 구에 대한 LAWD_CD 목록
