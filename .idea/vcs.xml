@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/04_기사 제목 fasttext 이용해 분류 및 시각화" vcs="Git" />
   </component>
 </project>
