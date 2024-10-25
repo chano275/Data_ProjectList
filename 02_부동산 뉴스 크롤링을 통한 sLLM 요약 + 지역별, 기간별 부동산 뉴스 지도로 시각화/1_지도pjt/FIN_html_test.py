@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+
 def check_article_content(link):
     response = requests.get(link)
     if response.status_code == 200:
@@ -10,5 +12,5 @@ def check_article_content(link):
         print(f"Failed to retrieve the page. Status code: {response.status_code}")
 
 # 테스트할 링크 입력
-test_link = "https://www.mk.co.kr/article/11145858"
+test_link = "https://sports.donga.com/article/all/20241022/130268017/1"
 check_article_content(test_link)

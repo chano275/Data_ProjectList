@@ -6,8 +6,9 @@ from bs4 import BeautifulSoup
 from FIN_parser_temp import get_article_content
 import requests
 import pandas as pd
+from datetime import datetime
 
-
+today = datetime.now().strftime("%y%m%d")  # 오늘 날짜를 6글자로 가져오기 (YYMMDD 형식)
 query = '부동산'  # 검색어 입력 (예: '프롭테크')  # 나중에 응용 프로그램화? / streamlit에 df형식 띄우기
 
 
@@ -50,4 +51,4 @@ df_news = pd.DataFrame(news_data)
 
 # 데이터프레임 출력
 print(df_news)
-df_news.to_csv('./241022.csv', encoding='utf-8-sig', index=False)
+df_news.to_csv(f'./{today}.csv', encoding='utf-8-sig', index=False)

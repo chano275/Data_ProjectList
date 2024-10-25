@@ -25,8 +25,11 @@ def hankyung(_url):  # 한국경제
 
 def mk(_url):  # 매일경제
     soup = BeautifulSoup(requests.get(_url).text, 'html.parser')
-    return ' '.join(p.get_text(strip=True) for p in soup.select('div.news_cnt_detail_wrap p')) if soup.select('div.news_cnt_detail_wrap p') else "본문을 찾을 수 없습니다."
-
+    content = soup.select_one('div.news_cnt_detail_wrap')
+    if content:
+        text = content.get_text(" ", strip=True)
+        return ' '.join(text.split()[:60])  # 기사 내용의 첫 60 단어만 반환
+    else:  return "본문을 찾을 수 없습니다."
 
 def fnnews(_url):  # 파이낸셜뉴스
     soup = BeautifulSoup(requests.get(_url).text, 'html.parser')
@@ -49,14 +52,28 @@ def w_donga(_url):  # 우먼동아
     soup = BeautifulSoup(requests.get(_url).text, 'html.parser')
     return ' '.join(p.get_text(strip=True) for p in soup.select('div.article_box p')) if soup.select('div.article_box p') else "본문을 찾을 수 없습니다."
 
+def s_donga(_url):  # 스포츠동아
+    soup = BeautifulSoup(requests.get(_url).text, 'html.parser')
+    content = soup.find('div', class_='article_word')
+    if content:
+        return content.get_text(" ", strip=True)  # 기사 본문을 공백으로 구분해 반환
+    else:
+        return "본문을 찾을 수 없습니다."
+
+
+
 def donga(_url):  # 동아일보
     soup = BeautifulSoup(requests.get(_url).text, 'html.parser')
     return ' '.join(p.get_text(strip=True) for p in soup.select('section.news_view')) if soup.select('section.news_view') else "본문을 찾을 수 없습니다."
 
-
 def kgnews(_url):  # 경기신문
     soup = BeautifulSoup(requests.get(_url).text, 'html.parser')
-    return soup.find('div', class_='content').get_text(strip=True) if soup.find('div', class_='content') else "본문을 찾을 수 없습니다."
+    content = soup.find('div', class_='smartOutput')
+    if content:
+        return content.get_text(" ", strip=True)  # 전체 텍스트를 공백으로 구분해 반환
+    else:
+        return "본문을 찾을 수 없습니다."
+
 
 def yna(_url):  # 연합뉴스
     soup = BeautifulSoup(requests.get(_url).text, 'html.parser')
@@ -77,6 +94,7 @@ def get_article_content(link):
     elif 'news.kbs.co.kr' in link:return kbs(link)
     elif 'weekly.donga' in link:return weekly_donga(link)
     elif 'woman.donga' in link:return w_donga(link)
+    elif 'sports.donga' in link:return s_donga(link)
     elif 'donga.com' in link:return donga(link)
     elif 'kgnews.co.kr' in link:return kgnews(link)
     elif 'yna.co.kr' in link:return yna(link)
